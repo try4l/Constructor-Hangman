@@ -4,20 +4,8 @@ var inquirer = require('inquirer');
 // Get the game, word and letter models
 var game = require('./game.js');
 var word = require('./word.js');
-var letter = require('./letter.js');
-
-
-
-//console.log("game", game);
-//console.log("word", word);
-//console.log("word.getRandomWord: ", word.getRandomWord);
-//console.log("word.word: ", word.word);
-//console.log("letter", letter);
 
 myGame = new game.game();
-//myGame.initialize();
-//myGame.display();
-
 
 inquirer.prompt([
   {
@@ -37,9 +25,7 @@ inquirer.prompt([
   }
 ]).then(function (answers) {
   console.log(JSON.stringify(answers, null, '  '));
-  console.log(answers);
-  console.log(answers.theme);
-  //console.log(answers.choice);
+  //console.log(answers);
 
   switch(answers.theme) {
       case 'Country names':
@@ -86,7 +72,7 @@ inquirer.prompt([
 // 
 // 
 
-var count = 0;
+//var count = 0;
 
 // var ui = new inquirer.ui.BottomBar();
 // // Or simply write output
@@ -99,8 +85,31 @@ var count = 0;
 
 // run the prompt or inquirer to get the user's input
 var getInput = function() {
-	if (count<5) {
-		console.log("getInput");
+		//console.log("getInput");	
+	if (myGame.invalidGuesses.length>myGame.maxInvalidGuesses) {
+		console.log("Game Over");
+		inquirer.prompt([
+		{
+			name: "replay",
+			message: "Do you want to play again? y/n"
+		}
+		]).then(function(answers){
+			console.log(JSON.stringify(answers, null, '  '));
+
+			var replay = answers.replay;
+			if (answers.replay.length > 1) {
+				replay = answers.replay[0];
+			}
+			if (replay.toLowerCase()=='n') {
+				return;
+			} else {
+				goAgain();
+			}
+		});
+		return;
+		
+	};
+
 
 		inquirer.prompt([
 		{
@@ -109,8 +118,11 @@ var getInput = function() {
 		}
 		]).then(function(answers){
 			var letter = answers.letter;
-			console.log("letter: ", letter);
-			count++;
+			if (answers.letter.length > 1) {
+				letter = answers.letter[0];
+			}
+			//console.log("letter: ", letter);
+			//count++;
 			//myGame = new Game();
 			//console.log("myGame: ", myGame);
 			//myGame.initialize();
@@ -118,13 +130,58 @@ var getInput = function() {
 			//console.log(getRandomWord());
 			myGame.processLetter(answers.letter.toLowerCase());
 			myGame.display();
+			game.showHangman(myGame.invalidGuesses.length);
 			console.log(myGame.displayWord());
 			getInput();
 		});
 
-	} else {
-		console.log("Done for now.");
-	}
+};
+
+var goAgain = function() {
+
+		//console.log("getInput");
+myGame = new game.game();	
+inquirer.prompt([
+  {
+    type: 'list',
+    name: 'theme',
+    message: 'Pick a hangman category.',
+    choices: [
+      'Country names',
+      new inquirer.Separator(),
+      'Musical instruments',
+      new inquirer.Separator(),
+      'Animals',
+      new inquirer.Separator(),
+      'Cities of the World',
+      new inquirer.Separator(),
+    ]
+  }
+]).then(function (answers) {
+  console.log(JSON.stringify(answers, null, '  '));
+  //console.log(answers);
+
+  switch(answers.theme) {
+      case 'Country names':
+          myGame.initialize(0);
+          break;
+      case 'Musical instruments':
+          myGame.initialize(1)
+          break;
+      case 'Animals':
+          myGame.initialize(2);
+          break;
+      case 'Cities of the World':
+          myGame.initialize(3);
+          break;
+      default:
+      	  console.log(answers.theme);
+          console.log("Error: Bad Word Bank number")
+          break;
+  }
+  getInput();
+});
+
 };
 
 //getInput();
