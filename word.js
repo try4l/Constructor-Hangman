@@ -67,7 +67,7 @@ var wordBank0 = [
  "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Svalbard And Jan Mayen", "Swaziland", "Sweden", 
  "Switzerland", "Syria", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tokelau", "Tonga", 
  "Trinidad And Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks And Caicos Islands", "Tuvalu", "Uganda", 
- "Kraine", "United Arab Emirates", "United Kingdom", "United States Of America", "Uruguay", "Ussr", 
+ "Kraine", "United Arab Emirates", "United Kingdom", "United States Of America", "Uruguay", "USSR", 
  "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands British", 
  "Virgin Islands Us", "Wales", "Wallis And Futuna", "Western Sahara", "Yemen", "Zambia", "Zimbabwe", 
 ];

@@ -28,15 +28,37 @@ Game.prototype.display = function () {
 };
 
 Game.prototype.processLetter = function (ltr) {
+  console.log("processLetter: ltr ", ltr);
   // iterate over word letters
-  // check if letter is in validGuesses or belongs in invalidGuesses
-  for (var i = 0; i < currentWord.length; i++) { 
-    if (currentWord[i].toLowerCase() === ltr) { // the letter is in the word
-      // is it already in the validGuesses?
+  // check if letter belongs in validGuesses or belongs in invalidGuesses
+  // return false if letter already used
 
-    } else {  // the letter is not in the word
-      // is it already in the invalidGuesses?
-  }
+  for (var i = 0; i < this.currentWord.length; i++) {
+    //console.log("this.currentWord[i].toLowerCase() ", this.currentWord[i].toLowerCase()); 
+    if (this.currentWord[i].toLowerCase() === ltr) { // the letter is in the word
+      console.log("ltr found in word");
+      // is it already in the validGuesses?
+      for (var j = 0; j < this.validGuesses.length; j++) {
+        if (this.validGuesses[j] === ltr) {
+          return(false); // letter already used
+        }
+      }
+    // letter belongs in validGuesses
+    this.validGuesses.push(ltr);
+    return (true);
+    }
+  };  
+  // } else {  // the letter is not in the word
+  console.log("ltr not found in word");
+  // is it already in the invalidGuesses?
+  for (var i = 0; i < this.invalidGuesses.length; i++) {
+    if (this.invalidGuesses[i] === ltr) {
+      return(false); // letter already used
+    }
+  };
+  // letter belongs in invalidGuesses
+  this.invalidGuesses.push(ltr);
+  return (true);
 };
 
 Game.prototype.displayWord = function () {
@@ -44,19 +66,30 @@ Game.prototype.displayWord = function () {
   // check if letter is in validGuesses
   // display letter or '_'
   // return display string
-  for (var i = 0; i < currentWord.length; i++) {
-    for (var j = 0; j < validGuesses.length; j++) {
+  dspWrdArr = [];
+  var newMatch = false;
 
-      if (currentWord[i].toLowerCase() === validGuess[j]) {
-        this.displayedWordArr.push(currentWord[i]);
-        this.displayedWordArr.push(' ');
-      } else {
-        this.displayedWordArr.push('_ ');
+  for (var i = 0; i < this.currentWord.length; i++) {
+    newMatch = false;
+    for (var j = 0; j < this.validGuesses.length; j++) {
+      if (this.currentWord[i].toLowerCase() === this.validGuesses[j]) {
+        // found a valid guess for this word position
+        //console.log("valid letter at index: ", i);
+        dspWrdArr.push(this.currentWord[i]);
+        dspWrdArr.push(' ');
+        newMatch = true;
       }
-
     }
+    if (newMatch!=true) {
+      // did not find a valid letter at this word position
+      //console.log("no valid letter at index: ", i);
+      dspWrdArr.push('_ ');
+      //dspWrdArr.push('_');
+      //dspWrdArr.push(' ');      
+    } 
   }
-  return (this.displayedWordArr.join(''));
+  //console.log("dspWrdArr: ", dspWrdArr);
+  return (dspWrdArr.join(''));
 };
 
 module.exports = {
