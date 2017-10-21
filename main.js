@@ -18,6 +18,15 @@ myGame.display();
 
 var count = 0;
 
+// var ui = new inquirer.ui.BottomBar();
+// // Or simply write output
+// ui.log.write('something just happened.');
+// ui.log.write('Almost over, standby!');
+// // During processing, update the bottom bar content to display a loader
+// // or output a progress bar, etc
+// ui.updateBottomBar('new bottom bar content');
+// ui.updateBottomBar('different stuff');
+
 // run the prompt or inquirer to get the user's input
 var getInput = function() {
 	if (count<5) {

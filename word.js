@@ -13,78 +13,71 @@ function getRandomWord (bank=0) {
 	    case 0:
 	        return (wordBank0[getRandomNumber(0, wordBank0.length)]);
 	        break;
-	
 	    case 1:
 	        return (wordBank1[getRandomNumber(0, wordBank1.length)]);
 	        break;
-	        
 		case 2:
 	        return (wordBank2[getRandomNumber(0, wordBank2.length)]);
 	        break;
-	
 	    case 3:
 	        return (wordBank3[getRandomNumber(0, wordBank3.length)]);
 	        break;
-	        
 	    default:
 	        console.log("Error: Bad word bank number");
 	        break;
 	}
 };
 
-
-
 // Get random number between max and min
 function getRandomNumber (min, max) {
     return Math.floor((Math.random() * (max - min + 1) ) + min);
 };
 
-
 // Country Names
 var wordBank0 = [
- "afghanistan", "aland islands", "albania", "algeria", "american samoa", "andorra", "angola", "anguilla", 
- "antarctica", "antigua and barbuda", "argentina", "armenia", "aruba", "australia", "austria", 
- "azerbaijan", "bahamas", "bahrain", "bangladesh", "barbados", "belarus", "belgium", "belize", "benin", 
- "bermuda", "bhutan", "bolivia", "bonaire", "bosnia and herzegovina", "botswana", "bouvet island", 
- "brazil", "british indian ocean territory", "brunei", "bulgaria", "burkina faso", "burundi", "cambodia", 
- "cameroon", "canada", "cape verde", "cayman islands", "central african republic", "chad", "chile", 
- "china", "christmas island", "cocos islands", "colombia", "comoros", "cook islands", "costa rica", 
- "cote d Ivoire", "countries", "croatia", "cuba", "curacao", "cyprus", "czech republic", 
- "democratic republic of the congo", "denmark", "djibouti", "dominica", "dominican republic", "east timor", 
- "ecuador", "egypt", "el salvador", "england", "equatorial guinea", "eritrea", "estonia", "ethiopia", 
- "european union", "falkland islands", "faroe islands", "fiji", "finland", "france", "french guiana", 
- "french polynesia", "french southern territories", "gabon", "gambia", "georgia", "germany", "ghana", 
- "gibraltar", "greece", "greenland", "grenada", "guadeloupe", "guam", "guatemala", "guernsey", "guinea", 
- "guinea bissau", "guyana", "haiti", "heard island and mcdonald islands", "honduras", "hong kong", 
- "hungary", "iceland", "india", "indonesia", "iran", "iraq", "ireland", "isle of man", "israel", "italy", 
- "jamaica", "japan", "jersey", "jordan", "kazakhstan", "kenya", "kiribati", "korea north", "korea south", 
- "kosovo", "kuwait", "kyrgyzstan", "laos", "latvia", "lebanon", "lesotho", "liberia", "libya", 
- "liechtenstein", "lithuania", "luxembourg", "macao", "macedonia", "madagascar", "malawi", "malaysia", 
- "maldives", "mali", "malta", "marshall islands", "martinique", "mauritania", "mauritius", "mayotte", 
- "mexico", "micronesia", "moldova", "monaco", "mongolia", "montenegro", "montserrat", "morocco", 
- "mozambique", "myanmar", "namibia", "nauru", "nepal", "netherlands", "new caledonia", "new zealand", 
- "nicaragua", "niger", "nigeria", "niue", "norfolk island", "northern mariana islands", "norway", "oman", 
- "pakistan", "palau", "palestinian territory", "panama", "papua new guinea", "paraguay", "peru", 
- "philippines", "pitcairn islands", "poland", "portugal", "puerto rico", "qatar", "republic of china", 
- "republic of the congo", "reunion", "romania", "russia", "rwanda", "saint barthelemy", "saint helena", 
- "saint kitts and nevis", "saint lucia", "saint martin", "saint pierre and miquelon", 
- "saint vincent and the grenadines", "samoa", "san marino", "sao tome and principe", "saudi arabia", 
- "scotland", "senegal", "serbia", "seychelles", "sierra leone", "singapore", "sint maarten", "slovakia", 
- "slovenia", "solomon islands", "somalia", "south africa", "south georgia and the south sandwich islands", 
- "south sudan", "spain", "sri lanka", "sudan", "suriname", "svalbard and jan mayen", "swaziland", "sweden", 
- "switzerland", "syria", "tajikistan", "tanzania", "thailand", "togo", "tokelau", "tonga", 
- "trinidad and tobago", "tunisia", "turkey", "turkmenistan", "turks and caicos islands", "tuvalu", "uganda", 
- "kraine", "united arab emirates", "united kingdom", "united states of america", "uruguay", "ussr", 
- "uzbekistan", "vanuatu", "vatican city", "venezuela", "vietnam", "virgin islands british", 
- "virgin islands us", "wales", "wallis and futuna", "western sahara", "yemen", "zambia", "zimbabwe", 
+ "Afghanistan", "Aland Islands", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", 
+ "Antarctica", "Antigua And Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", 
+ "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", 
+ "Bermuda", "Bhutan", "Bolivia", "Bonaire", "Bosnia And Herzegovina", "Botswana", "Bouvet Island", 
+ "Brazil", "British Indian Ocean Territory", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", 
+ "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", 
+ "China", "Christmas Island", "Cocos Islands", "Colombia", "Comoros", "Cook Islands", "Costa Rica", 
+ "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", 
+ "Democratic Republic Of The Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", 
+ "Ecuador", "Egypt", "El Salvador", "England", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", 
+ "European Union", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Guiana", 
+ "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", 
+ "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guernsey", "Guinea", 
+ "Guinea Bissau", "Guyana", "Haiti", "Heard Island And Mcdonald Islands", "Honduras", "Hong Kong", 
+ "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle Of Man", "Israel", "Italy", 
+ "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea North", "Korea South", 
+ "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", 
+ "Liechtenstein", "Lithuania", "Luxembourg", "Macao", "Macedonia", "Madagascar", "Malawi", "Malaysia", 
+ "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", 
+ "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", 
+ "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Caledonia", "New Zealand", 
+ "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands", "Norway", "Oman", 
+ "Pakistan", "Palau", "Palestinian Territory", "Panama", "Papua New Guinea", "Paraguay", "Peru", 
+ "Philippines", "Pitcairn Islands", "Poland", "Portugal", "Puerto Rico", "Qatar", "Republic Of China", 
+ "Republic Of The Congo", "Reunion", "Romania", "Russia", "Rwanda", "Saint Barthelemy", "Saint Helena", 
+ "Saint Kitts And Nevis", "Saint Lucia", "Saint Martin", "Saint Pierre And Miquelon", 
+ "Saint Vincent And The Grenadines", "Samoa", "San Marino", "Sao Tome And Principe", "Saudi Arabia", 
+ "Scotland", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Sint Maarten", "Slovakia", 
+ "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia And The South Sandwich Islands", 
+ "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Svalbard And Jan Mayen", "Swaziland", "Sweden", 
+ "Switzerland", "Syria", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tokelau", "Tonga", 
+ "Trinidad And Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks And Caicos Islands", "Tuvalu", "Uganda", 
+ "Kraine", "United Arab Emirates", "United Kingdom", "United States Of America", "Uruguay", "Ussr", 
+ "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands British", 
+ "Virgin Islands Us", "Wales", "Wallis And Futuna", "Western Sahara", "Yemen", "Zambia", "Zimbabwe", 
 ];
 
 // Musical Instruments
 var wordBank1 = [
-"Accordion", "Bagpipes", "Banjo", "Bassoon", "Cello", "Clarinet", "Cymbal", "Double bass", "Drum", 
-"Bass drum", "Bongo drum", "Snare drum", "Timpani", "Dulcimer", "Flute", "French horn", "Gong", 
-"Guitar", "Electric guitar", "Harp", "Harpsichord", "Hurdy gurdy", "Jaw harp", "Lute", "Lyre", 
-"Marimba", "Oboe", "Organ", "Pan pipes", "Pennywhistle", "Piano", "Recorder", "Saxophone", "Sitar", 
+"Accordion", "Bagpipes", "Banjo", "Bassoon", "Cello", "Clarinet", "Cymbal", "Double Bass", "Drum", 
+"Bass Drum", "Bongo Drum", "Snare Drum", "Timpani", "Dulcimer", "Flute", "French Horn", "Gong", 
+"Guitar", "Electric Guitar", "Harp", "Harpsichord", "Hurdy Gurdy", "Jaw Harp", "Lute", "Lyre", 
+"Marimba", "Oboe", "Organ", "Pan Pipes", "Pennywhistle", "Piano", "Recorder", "Saxophone", "Sitar", 
 "Synthesizer", "Tambourine", "Triangle", "Trombone", "Trumpet", "Tuba", "Viola", "Violin", "Fiddle", 
 "Xylophone", "Zither",
 ];
@@ -191,21 +184,6 @@ var wordBank3 = [
 "Munich", "Portland", "Brussels", "Vienna", "San Jose", "Damman", "Copenhagen", "Brisbane", "Riverside", "San Bernardino", 
 "Cincinnati", "Accra", "Tokyo", "Yokohama",
 ];
-
-//console.log("wordBank0[0]", wordBank0[0]);
-//console.log("wordBank0.length", wordBank0.length);
-
-//console.log("wordBank1[0]", wordBank1[0]);
-//console.log("wordBank1.length", wordBank1.length);
-
-//console.log("wordBank2[0]", wordBank2[0]);
-//console.log("wordBank2.length", wordBank2.length);
-
-//console.log("wordBank3[0]", wordBank3[0]);
-//console.log("wordBank3.length", wordBank3.length);
-
-//console.log(getRandomWord());
-
 
 module.exports = {
 	word: Word,
