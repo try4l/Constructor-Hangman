@@ -4,14 +4,17 @@ console.log('game file is loaded');
 var word = require('./word.js');
 //var letter = require('./letter.js');
 
+// global flags 
+gblWins = 0;
+gblLosses = 0;
+
 var Game = function () {
   this.currentWord = null;
   this.displayedWordArr = [];
   this.validGuesses = [];
   this.invalidGuesses = [];
   this.maxInvalidGuesses = 9;
-  this.wins = 0;
-  this.losses = 0;
+  this.winFlag = false;
 };
 
 Game.prototype.initialize = function (bank) {
@@ -23,14 +26,15 @@ Game.prototype.display = function () {
   console.log("validGuesses: ", this.validGuesses);  
   console.log("invalidGuesses: ", this.invalidGuesses);  
   console.log("maxInvalidGuesses:", this.maxInvalidGuesses);  
-  console.log("wins:", this.wins);  
-  console.log("losses:", this.losses);  
+  console.log("wins:", gblWins);  
+  console.log("losses:", gblLosses); 
+  console.log("winFlag:", this.winFlag);  
 };
 
 Game.prototype.processLetter = function (ltr) {
   // iterate over word letters
   // check if letter belongs in validGuesses or belongs in invalidGuesses
-  // return false if letter already used
+  // return true or false if guess is right or wrong, respectively
 
   for (var i = 0; i < this.currentWord.length; i++) {
     //console.log("this.currentWord[i].toLowerCase() ", this.currentWord[i].toLowerCase()); 
@@ -38,24 +42,24 @@ Game.prototype.processLetter = function (ltr) {
       // is it already in the validGuesses?
       for (var j = 0; j < this.validGuesses.length; j++) {
         if (this.validGuesses[j] === ltr) {
-          return(false); // letter already used
+          return("usedLetter"); // letter already used
         }
       }
     // letter belongs in validGuesses
     this.validGuesses.push(ltr);
-    return (true);
+    return ("correct");
     }
   };  
   // the letter is not in the word
   // is it already in the invalidGuesses?
   for (var i = 0; i < this.invalidGuesses.length; i++) {
     if (this.invalidGuesses[i] === ltr) {
-      return(false); // letter already used
+      return("usedLetter"); // letter already used
     }
   };
   // letter belongs in invalidGuesses
   this.invalidGuesses.push(ltr);
-  return (true);
+  return ("incorrect");
 };
 
 Game.prototype.displayWord = function () {
@@ -81,14 +85,31 @@ Game.prototype.displayWord = function () {
       // did not find a valid letter at this word position
       //console.log("no valid letter at index: ", i);
       if (this.currentWord[i] != " ") {  // skip spaces
-        dspWrdArr.push('_ ');
+        dspWrdArr.push('_');
+        dspWrdArr.push(' ');
+      } else {                // but show the word gap
+        dspWrdArr.push(' ');
+        dspWrdArr.push(' ');
       }
       
     } 
   }
   //console.log("dspWrdArr: ", dspWrdArr);
+  this.checkForWin(dspWrdArr);
   return (dspWrdArr.join(''));
 };
+
+Game.prototype.checkForWin = function (dspWrdArr) {
+    //console.log("dspWrdArr: ", dspWrdArr);
+    function chkUndrLin (char) {
+      return(char!='_');
+    }
+    if (dspWrdArr.every(chkUndrLin)) {
+      this.winFlag = true;
+    }
+    console.log("dspWrdArr.every(chkUndrLin): (did we win?) ", dspWrdArr.every(chkUndrLin));
+    return dspWrdArr.every(chkUndrLin);
+}
 
 // 
 // show hangman - brute force style with console chars
@@ -160,7 +181,7 @@ var thisChar = '';
 var rowArr = [];
 
   // update score and letters guessed
-  hangmanShadowArr[8] = shadowRowCpy1 + myGame.wins + "                " + myGame.losses;
+  hangmanShadowArr[8] = shadowRowCpy1 + gblWins + "                " + gblLosses;
   hangmanShadowArr[13] = shadowRowCpy2.concat(myGame.invalidGuesses);
 
   for (var i = 0; i < hangmanArr.length; i++) {
