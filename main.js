@@ -5,7 +5,14 @@ var inquirer = require('inquirer');
 var game = require('./game.js');
 var word = require('./word.js');
 
+var escRst = '\x1b[0m';
+var escBrt = '\x1b[1m';
+var escRed = '\x1b[31m';
+var escGrn = '\x1b[32m'; 
+
 myGame = new game.game();
+
+console.log("\x1b[1m"); 	// bright
 
 inquirer.prompt([
   {
@@ -24,7 +31,7 @@ inquirer.prompt([
     ]
   }
 ]).then(function (answers) {
-  console.log(JSON.stringify(answers, null, '  '));
+  //console.log(JSON.stringify(answers, null, '  '));
   //console.log(answers);
 
   switch(answers.theme) {
@@ -50,8 +57,14 @@ inquirer.prompt([
 
 // Run inquirer to get the user's input
 var getInput = function() {
-		//console.log("getInput");	
-	if (myGame.invalidGuesses.length>myGame.maxInvalidGuesses || myGame.winFlag===true) {
+	//console.log("getInput");
+	if (myGame.invalidGuesses.length>=myGame.maxInvalidGuesses) {
+		console.log(escBrt+escRed+'Sorry - You Lose.'+escRst+escBrt + '(' + myGame.currentWord + ')' );
+	}	
+	if (myGame.winFlag===true) {
+		console.log(escBrt+escGrn+'You WIN!!! Good job!'+escRst+escBrt);		
+	}	
+	if (myGame.invalidGuesses.length>=myGame.maxInvalidGuesses || myGame.winFlag===true) {
 		console.log("Game Over");
 		inquirer.prompt([
 		{
@@ -59,7 +72,7 @@ var getInput = function() {
 			message: "Do you want to play again? y/n"
 		}
 		]).then(function(answers){
-			console.log(JSON.stringify(answers, null, '  '));
+			//console.log(JSON.stringify(answers, null, '  '));
 
 			var replay = answers.replay;
 			if (answers.replay.length > 1) {
@@ -82,26 +95,28 @@ var getInput = function() {
 	]).then(function(answers){
 		var letter = answers.letter;
 		var procLtr = '';
-		var dispStr = '';
 		if (answers.letter.length > 1) {
 			letter = answers.letter[0];
 		}
 		procLtr = myGame.processLetter(answers.letter.toLowerCase());
-		myGame.display();
+		//myGame.display();
 
 		game.showHangman(myGame.invalidGuesses.length); // draw a pretty picture
 
+		console.log(escBrt);
 		console.log(myGame.displayWord());
+		console.log();
 		console.log((myGame.maxInvalidGuesses-myGame.invalidGuesses.length), " Guess(es) Remaining");
-		console.log("procLtr: (result from processing letter: ", procLtr);
+		console.log();
+		//console.log("procLtr: (result from processing letter: ", procLtr);
 		if (procLtr==='correct') {
-			console.log("CORRECT!!")
+			console.log(escBrt+escGrn+'CORRECT!!'+escRst+escBrt); 
 		} else if (procLtr==='incorrect') {
-			console.log("INCORRECT!");
+			console.log(escBrt+escRed+'INCORRECT!'+escRst+escBrt);
 		} else {
 			console.log("Type an unused letter.")
 		} 
-		console.log(myGame.winFlag);
+		//console.log(myGame.winFlag);
 		getInput();
 	});
 

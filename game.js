@@ -1,8 +1,7 @@
 console.log('game file is loaded');
 
-// Get the word and letter models
+// Get the word model
 var word = require('./word.js');
-//var letter = require('./letter.js');
 
 // global flags 
 gblWins = 0;
@@ -31,10 +30,21 @@ Game.prototype.display = function () {
   console.log("winFlag:", this.winFlag);  
 };
 
+Game.prototype.displayStatus = function () {
+  procLtr = myGame.processLetter(answers.letter.toLowerCase());
+  game.showHangman(myGame.invalidGuesses.length); // draw a pretty picture
+
+  console.log(myGame.displayWord());
+  console.log((myGame.maxInvalidGuesses-myGame.invalidGuesses.length), " Guess(es) Remaining");
+};
+
 Game.prototype.processLetter = function (ltr) {
   // iterate over word letters
   // check if letter belongs in validGuesses or belongs in invalidGuesses
   // return true or false if guess is right or wrong, respectively
+  if (!(ltr.length==1 && ltr.match(/[a-z]/i))) {
+    return("badLetter");
+  } 
 
   for (var i = 0; i < this.currentWord.length; i++) {
     //console.log("this.currentWord[i].toLowerCase() ", this.currentWord[i].toLowerCase()); 
@@ -106,8 +116,9 @@ Game.prototype.checkForWin = function (dspWrdArr) {
     }
     if (dspWrdArr.every(chkUndrLin)) {
       this.winFlag = true;
+      gblWins+=1;
     }
-    console.log("dspWrdArr.every(chkUndrLin): (did we win?) ", dspWrdArr.every(chkUndrLin));
+    //console.log("dspWrdArr.every(chkUndrLin): (did we win?) ", dspWrdArr.every(chkUndrLin));
     return dspWrdArr.every(chkUndrLin);
 }
 
